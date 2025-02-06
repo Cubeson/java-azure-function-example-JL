@@ -19,6 +19,6 @@
         <property name="hibernate.format_sql">true</property>
 
         <!-- Nazwa klasy encji -->
-        <mapping class="com.example.model.Person"/>
+        <!-- <mapping class="org.example.functions.db.Person"/> -->
     </session-factory>
 </hibernate-configuration>
