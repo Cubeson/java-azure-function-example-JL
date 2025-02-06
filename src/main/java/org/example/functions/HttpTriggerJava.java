@@ -10,11 +10,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.microsoft.azure.functions.annotation.*;
 import com.microsoft.azure.functions.*;
-import org.example.functions.db.HibernateUtil;
 import org.example.functions.db.Person;
-import org.hibernate.MultiIdentifierLoadAccess;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 
 /**
  * Azure Functions with HTTP Trigger.
