@@ -57,6 +57,20 @@ public class HttpTriggerJava {
             return request.createResponseBuilder(HttpStatus.BAD_REQUEST).body(e.getStackTrace()).build();
         }
     }
+    @FunctionName("tmp")
+    public HttpResponseMessage tmp(
+            @HttpTrigger(name = "req", methods = {HttpMethod.GET}, authLevel = AuthorizationLevel.FUNCTION) HttpRequestMessage<Optional<String>> request,
+            final ExecutionContext context) throws JsonProcessingException {
+        String json = "{\n" +
+                "    \"FirstName\": \"Jan1\",\n" +
+                "    \"LastName\": \"Kowalski\"\n" +
+                "}";
+        ObjectMapper mapper = new ObjectMapper();
+        Person person = mapper.readValue(json, Person.class);
+
+        return request.createResponseBuilder(HttpStatus.OK).body(person).build();
+    }
+
     @FunctionName("AddPerson")
     public HttpResponseMessage AddPerson(
             @HttpTrigger(name = "req", methods = {HttpMethod.POST}, authLevel = AuthorizationLevel.FUNCTION) HttpRequestMessage<Optional<String>> request,

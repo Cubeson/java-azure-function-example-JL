@@ -1,4 +1,5 @@
 package org.example.functions.db;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -16,27 +17,30 @@ public class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @JsonProperty("Id")
+    private Long Id;
 
-    @Column(name = "first_name", nullable=false, length = 40)
-    private String firstName;
+    @Column(name = "FirstName", nullable=false, length = 40)
+    @JsonProperty("FirstName")
+    private String FirstName;
 
-    @Column(name = "last_name", nullable=false, length = 40)
-    private String lastName;
+    @Column(name = "LastName", nullable=false, length = 40)
+    @JsonProperty("LastName")
+    private String LastName;
 
     public Person() {}
 
     public Person(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.FirstName = firstName;
+        this.LastName = lastName;
     }
 
     @Override
     public String toString() {
         return "Person{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+                "id=" + Id +
+                ", firstName='" + FirstName + '\'' +
+                ", lastName='" + LastName + '\'' +
                 '}';
     }
 }
