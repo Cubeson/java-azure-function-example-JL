@@ -3,6 +3,11 @@ package org.example.functions;
 import java.util.*;
 import com.microsoft.azure.functions.annotation.*;
 import com.microsoft.azure.functions.*;
+import org.example.functions.db.HibernateUtil;
+import org.example.functions.db.Person;
+import org.hibernate.MultiIdentifierLoadAccess;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 /**
  * Azure Functions with HTTP Trigger.
@@ -29,4 +34,16 @@ public class HttpTriggerJava {
             return request.createResponseBuilder(HttpStatus.OK).body("Hello, " + name).build();
         }
     }
+    @FunctionName("GetPersons")
+    public HttpResponseMessage GetPersons(
+            @HttpTrigger(name = "req", methods = {HttpMethod.GET}, authLevel = AuthorizationLevel.FUNCTION) HttpRequestMessage<Optional<String>> request,
+            final ExecutionContext context) {
+        SessionFactory sf = HibernateUtil.getSessionFactory();
+        Session session = sf.openSession();
+        MultiIdentifierLoadAccess<Person> multi = session.byMultipleIds(Person.class);
+        List<Person> persons = multi.multiLoad();
+        return request.createResponseBuilder(HttpStatus.OK).body(persons).build();
+    }
+
 }
+
