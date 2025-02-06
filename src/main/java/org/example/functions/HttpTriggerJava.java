@@ -38,10 +38,16 @@ public class HttpTriggerJava {
     public HttpResponseMessage GetPersons(
             @HttpTrigger(name = "req", methods = {HttpMethod.GET}, authLevel = AuthorizationLevel.FUNCTION) HttpRequestMessage<Optional<String>> request,
             final ExecutionContext context) {
+        context.getLogger().info("Starting execution of GetPersons.");
         SessionFactory sf = HibernateUtil.getSessionFactory();
+        context.getLogger().info("Created SessionFactory.");
         Session session = sf.openSession();
+        context.getLogger().info("Opened Session.");
         MultiIdentifierLoadAccess<Person> multi = session.byMultipleIds(Person.class);
+        context.getLogger().info("Obtained persons from DB.");
         List<Person> persons = multi.multiLoad();
+        context.getLogger().info("Multiloaded persons.");
+
         return request.createResponseBuilder(HttpStatus.OK).body(persons).build();
     }
 
