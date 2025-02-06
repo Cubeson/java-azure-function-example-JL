@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <!-- Połączenie z bazą danych -->
+        <property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+
+        <!-- Dialekt SQL dla konkretnej bazy -->
+        <property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
+
+        <!-- Automatyczna aktualizacja schematu (opcjonalnie, w produkcji lepiej tego unikać) -->
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <!-- Logowanie zapytań SQL -->
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.format_sql">true</property>
+
+        <!-- Nazwa klasy encji -->
+        <mapping class="com.example.model.Person"/>
+    </session-factory>
+</hibernate-configuration>
